@@ -57,8 +57,9 @@ class Main extends Component {
       console.log(`Selected file - ${this.fileInput.current.files[0].name}`);
       const data = new FormData();
       data.append("file", this.fileInput.current.files[0]);
+
       axios
-        .post("https://e619a575f052.ngrok.io/api/upload", data)
+        .post("http://localhost:3001/login", data)
         .then((response) => {
           console.log(response.data);
 
