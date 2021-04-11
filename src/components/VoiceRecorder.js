@@ -29,11 +29,15 @@ class VoiceRecorder extends Component {
     console.log("audioData", audioData.blob);
     console.log("audioData", audioData.url);
     console.log("audioData", audioData.type);
+
     var data = new FormData();
-    data.append("audio", audioData.url);
+    data.append("file", audioData.blob);
     axios
-      .post("http://localhost:3001/login", data)
-      .then((res) => console.log(res))
+      .post("https://075d851574a6.ngrok.io/api/upload", data)
+      .then((res) => {
+        console.log(res);
+        this.props.parentCallback(res);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -43,7 +47,6 @@ class VoiceRecorder extends Component {
     return (
       <div>
         <AudioReactRecorder state={recordState} onStop={this.onStop} />
-
         <button onClick={this.start}>Start</button>
         <button onClick={this.stop}>Stop</button>
       </div>

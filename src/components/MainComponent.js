@@ -2,19 +2,8 @@ import React, { Component } from "react";
 import { Card, CardBody, CardHeader } from "reactstrap";
 import Header from "./HeaderComponent";
 import axios from "axios";
-const translation = [
-  "شو اعمل له انا",
-  {
-    GenericPlus_Model: "what should i do",
-    IT_Model: "what can i do to him",
-  },
-  {
-    GenericPlus_Model: "ماذا يجب أن أفعل",
-    IT_Model: "ماذا افعل به",
-  },
-];
-//result: translation.map(({ GenericPlus_Model }) => GenericPlus_Model),
-//result2: translation.map(({ IT_Model }) => IT_Model),
+import VoiceRecorder from "./VoiceRecorder";
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -33,10 +22,17 @@ class Main extends Component {
       textarea_input: event.target.value,
     });
   }
+  handleCallback = (response) => {
+    this.setState({
+      ourInput: response.data[0],
+      result: response.data[1],
+      result2: response.data[2],
+    });
+  };
 
   handlesubmit(e) {
     e.preventDefault(); // Stop form submit
-
+    alert("this might take a while");
     if (
       this.state.textarea_input !== "" &&
       this.fileInput.current.files[0] == null
@@ -45,8 +41,8 @@ class Main extends Component {
 
       this.setState({
         ourInput: this.state.textarea_input,
-        result: translation.map(({ GenericPlus_Model }) => GenericPlus_Model),
-        result2: translation.map(({ IT_Model }) => IT_Model),
+        //result: translation.map(({ GenericPlus_Model }) => GenericPlus_Model),
+        //result2: translation.map(({ IT_Model }) => IT_Model),
       });
 
       this.setState({ textarea_input: "" });
@@ -59,7 +55,7 @@ class Main extends Component {
       data.append("file", this.fileInput.current.files[0]);
 
       axios
-        .post("http://localhost:3001/login", data)
+        .post("https://075d851574a6.ngrok.io/api/upload", data)
         .then((response) => {
           console.log(response.data);
 
@@ -84,18 +80,27 @@ class Main extends Component {
           <div className="container">
             <div className="row h-100 mt-2 mb-2">
               <div className="inputs col-12 col-lg-4">
+                <Card className="h-30">
+                  <CardHeader>Upload Voice Recording:</CardHeader>
+                  <CardBody>
+                    <VoiceRecorder parentCallback={this.handleCallback} />
+                  </CardBody>
+                </Card>
+
                 <form
                   onSubmit={this.handlesubmit}
                   encType="multipart/form-data"
                 >
-                  <Card className="h-30">
+                  <h1>OR</h1>
+                  <Card className="h-40">
                     <CardHeader>Upload Voice Recorded file:</CardHeader>
                     <CardBody>
                       <input type="file" ref={this.fileInput} />
                     </CardBody>
                   </Card>
                   <h1>OR</h1>
-                  <Card className="h-50">
+
+                  <Card className="h-40">
                     <CardHeader>Enter text for translation:</CardHeader>
                     <CardBody>
                       <textarea

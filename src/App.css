@@ -20,5 +20,10 @@ form {
 .translations {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
+  line-height: 30px;
+}
+.audio-react-recorder canvas {
+  height: 100% !important;
+  width: 100% !important;
 }
