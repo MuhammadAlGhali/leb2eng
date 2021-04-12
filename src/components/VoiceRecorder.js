@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { baseUrl } from "../shared/baseUrl";
 import AudioReactRecorder, { RecordState } from "audio-react-recorder";
 import axios from "axios";
 
@@ -33,7 +33,7 @@ class VoiceRecorder extends Component {
     var data = new FormData();
     data.append("file", audioData.blob);
     axios
-      .post("https://075d851574a6.ngrok.io/api/upload", data)
+      .post(baseUrl + "/api/upload", data)
       .then((res) => {
         console.log(res);
         this.props.parentCallback(res);

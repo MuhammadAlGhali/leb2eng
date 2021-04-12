@@ -3,6 +3,7 @@ import { Card, CardBody, CardHeader } from "reactstrap";
 import Header from "./HeaderComponent";
 import axios from "axios";
 import VoiceRecorder from "./VoiceRecorder";
+import { baseUrl } from "../shared/baseUrl";
 
 class Main extends Component {
   constructor(props) {
@@ -38,12 +39,19 @@ class Main extends Component {
       this.fileInput.current.files[0] == null
     ) {
       console.log(this.state.textarea_input);
-
       this.setState({
         ourInput: this.state.textarea_input,
-        //result: translation.map(({ GenericPlus_Model }) => GenericPlus_Model),
-        //result2: translation.map(({ IT_Model }) => IT_Model),
       });
+      axios
+        .get(`${baseUrl}/api/translate?input=${this.state.textarea_input}`)
+        .then((response) => {
+          console.log(response.data);
+          this.setState({
+            result: response.data[0],
+            result2: response.data[1],
+          });
+        })
+        .catch((err) => console.log(err));
 
       this.setState({ textarea_input: "" });
     } else if (
@@ -55,7 +63,7 @@ class Main extends Component {
       data.append("file", this.fileInput.current.files[0]);
 
       axios
-        .post("https://075d851574a6.ngrok.io/api/upload", data)
+        .post(baseUrl + "/api/upload", data)
         .then((response) => {
           console.log(response.data);
 
@@ -119,13 +127,13 @@ class Main extends Component {
               </div>
               <div className="translations col-12 col-lg-8">
                 <div className="our-Input">
-                  <Card>
+                  <Card className="h-100">
                     <CardHeader>The phrase you entered is: </CardHeader>
                     <CardBody>{this.state.ourInput}</CardBody>
                   </Card>
                 </div>
                 <div className="english-trans">
-                  <Card>
+                  <Card className="h-100">
                     <CardHeader>
                       The English for the phrase you entered is:
                     </CardHeader>
@@ -138,7 +146,7 @@ class Main extends Component {
                   </Card>
                 </div>
                 <div className="eng-to-arab-trans">
-                  <Card>
+                  <Card className="h-100">
                     <CardHeader>
                       The MSA for the phrase you entered is:
                     </CardHeader>

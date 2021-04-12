@@ -27,3 +27,24 @@ form {
   height: 100% !important;
   width: 100% !important;
 }
+.our-Input {
+  height: 20%;
+}
+.english-trans {
+  height: 38%;
+}
+
+.eng-to-arab-trans {
+  height: 38%;
+}
+.card {
+  border: none !important;
+}
+.card-header {
+  background-color: #703030 !important;
+  color: #cc9c2c;
+}
+.translations .card-body {
+  font-size: larger;
+  line-height: 50px;
+}
