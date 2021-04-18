@@ -1,1 +1,1 @@
-export const baseUrl = "https://33f041834537.ngrok.io";
+export const baseUrl = "https://sharp-snail-69.loca.lt";

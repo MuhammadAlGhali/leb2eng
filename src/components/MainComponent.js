@@ -4,6 +4,7 @@ import Header from "./HeaderComponent";
 import axios from "axios";
 import VoiceRecorder from "./VoiceRecorder";
 import { baseUrl } from "../shared/baseUrl";
+import Loading from "./Loading";
 
 class Main extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Main extends Component {
       ourInput: "",
       result: "",
       result2: "",
+      isLoading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handlesubmit = this.handlesubmit.bind(this);
@@ -25,10 +27,14 @@ class Main extends Component {
   }
   handleCallback = (response) => {
     this.setState({
+      isLoading: false,
       ourInput: response.data[0],
       result: response.data[1],
       result2: response.data[2],
     });
+  };
+  parentLoading = (isloading) => {
+    this.setState({ isLoading: isloading });
   };
 
   handlesubmit(e) {
@@ -44,9 +50,11 @@ class Main extends Component {
       });
       axios
         .get(`${baseUrl}/api/translate?input=${this.state.textarea_input}`)
+        .then(this.setState({ isLoading: true }))
         .then((response) => {
           console.log(response.data);
           this.setState({
+            isLoading: false,
             result: response.data[0],
             result2: response.data[1],
           });
@@ -61,20 +69,20 @@ class Main extends Component {
       console.log(`Selected file - ${this.fileInput.current.files[0].name}`);
       const data = new FormData();
       data.append("file", this.fileInput.current.files[0]);
-
       axios
         .post(baseUrl + "/api/upload", data)
+        .then(this.setState({ isLoading: true }))
         .then((response) => {
           console.log(response.data);
 
           this.setState({
+            isLoading: false,
             ourInput: response.data[0],
             result: response.data[1],
             result2: response.data[2],
           });
         })
         .catch((err) => console.log(err));
-
       this.fileInput.current.value = null;
     } else {
       alert("You should input a file or text to translate");
@@ -91,7 +99,10 @@ class Main extends Component {
                 <Card className="h-30">
                   <CardHeader>Upload Voice Recording:</CardHeader>
                   <CardBody>
-                    <VoiceRecorder parentCallback={this.handleCallback} />
+                    <VoiceRecorder
+                      parentCallback={this.handleCallback}
+                      parentLoading={this.parentLoading}
+                    />
                   </CardBody>
                 </Card>
 
@@ -129,32 +140,53 @@ class Main extends Component {
                 <div className="our-Input">
                   <Card className="h-100">
                     <CardHeader>The phrase you entered is: </CardHeader>
-                    <CardBody>{this.state.ourInput}</CardBody>
+                    <CardBody>
+                      {" "}
+                      {this.state.isLoading ? <Loading /> : this.state.ourInput}
+                    </CardBody>
                   </Card>
                 </div>
                 <div className="english-trans">
                   <Card className="h-100">
                     <CardHeader>
-                      The English for the phrase you entered is:
+                      The English for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
                       GenericPlus Model:{" "}
-                      {this.state.result["GenericPlus Model"]}
+                      {this.state.isLoading ? (
+                        <Loading />
+                      ) : (
+                        this.state.result["GenericPlus Model"]
+                      )}
                       <br />
-                      IT Model: {this.state.result["IT Model"]}
+                      IT Model:{" "}
+                      {this.state.isLoading ? (
+                        <Loading />
+                      ) : (
+                        this.state.result["IT Model"]
+                      )}
                     </CardBody>
                   </Card>
                 </div>
                 <div className="eng-to-arab-trans">
                   <Card className="h-100">
                     <CardHeader>
-                      The MSA for the phrase you entered is:
+                      The MSA for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
                       GenericPlus Model:{" "}
-                      {this.state.result2["GenericPlus Model"]}
+                      {this.state.isLoading ? (
+                        <Loading />
+                      ) : (
+                        this.state.result2["GenericPlus Model"]
+                      )}
                       <br />
-                      IT Model: {this.state.result2["IT Model"]}
+                      IT Model:{" "}
+                      {this.state.isLoading ? (
+                        <Loading />
+                      ) : (
+                        this.state.result2["IT Model"]
+                      )}
                     </CardBody>
                   </Card>
                 </div>

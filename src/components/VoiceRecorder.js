@@ -34,6 +34,7 @@ class VoiceRecorder extends Component {
     data.append("file", audioData.blob);
     axios
       .post(baseUrl + "/api/upload", data)
+      .then(this.props.parentLoading(true))
       .then((res) => {
         console.log(res);
         this.props.parentCallback(res);
