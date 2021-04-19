@@ -1,1 +1,1 @@
-export const baseUrl = "https://sharp-snail-69.loca.lt";
+export const baseUrl = "http://127.0.0.1:5000/";

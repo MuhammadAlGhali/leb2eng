@@ -39,7 +39,6 @@ class Main extends Component {
 
   handlesubmit(e) {
     e.preventDefault(); // Stop form submit
-    alert("this might take a while");
     if (
       this.state.textarea_input !== "" &&
       this.fileInput.current.files[0] == null
@@ -152,18 +151,11 @@ class Main extends Component {
                       The English for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
-                      GenericPlus Model:{" "}
+                      
                       {this.state.isLoading ? (
                         <Loading />
                       ) : (
-                        this.state.result["GenericPlus Model"]
-                      )}
-                      <br />
-                      IT Model:{" "}
-                      {this.state.isLoading ? (
-                        <Loading />
-                      ) : (
-                        this.state.result["IT Model"]
+                        this.state.result
                       )}
                     </CardBody>
                   </Card>
@@ -174,18 +166,11 @@ class Main extends Component {
                       The MSA for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
-                      GenericPlus Model:{" "}
+                      
                       {this.state.isLoading ? (
                         <Loading />
                       ) : (
-                        this.state.result2["GenericPlus Model"]
-                      )}
-                      <br />
-                      IT Model:{" "}
-                      {this.state.isLoading ? (
-                        <Loading />
-                      ) : (
-                        this.state.result2["IT Model"]
+                        this.state.result2["Microsoft Model"]
                       )}
                     </CardBody>
                   </Card>
