@@ -8,7 +8,7 @@
   background-color: #52057b;
   height: 100%;
   border-radius: 20px;
-  box-shadow: #3a3838 10% 10%;
+  box-shadow: #3a3838 5px 7px;
 }
 
 .headerBar {
@@ -22,8 +22,7 @@ form {
 .translations {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  line-height: 30px;
+  justify-content: flex-start;
 }
 .audio-react-recorder canvas {
   height: 100% !important;
@@ -31,21 +30,13 @@ form {
 }
 .inputs {
   color: white;
-}
-.our-Input {
-  height: 20%;
-}
-.english-trans {
-  height: 38%;
+  padding-bottom: 5px;
 }
 
-.eng-to-arab-trans {
-  height: 38%;
-}
 .card {
-  border: 1px !important;
-  border-radius: 30px;
-  box-shadow: #3a3838 10% 10%;
+  border: #312f2f 1px !important;
+  border-radius: 5px !important;
+  box-shadow: #3a3838 2px 2px;
 }
 .card-header {
   background-color: #312f2f !important;
@@ -56,6 +47,6 @@ form {
   color: black;
 }
 .translations .card-body {
-  font-size: larger;
-  line-height: 50px;
+  font-size: medium;
+  padding-top: 0;
 }

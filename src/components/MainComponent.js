@@ -95,7 +95,7 @@ class Main extends Component {
           <div className="container">
             <div className="row h-100 mt-2 mb-2">
               <div className="inputs col-12 col-lg-4">
-                <Card className="h-30">
+                <Card className="h-20">
                   <CardHeader>Upload Voice Recording:</CardHeader>
                   <CardBody>
                     <VoiceRecorder
@@ -137,35 +137,47 @@ class Main extends Component {
               </div>
               <div className="translations col-12 col-lg-8">
                 <div className="our-Input">
-                  <Card className="h-100">
+                  <Card className="">
                     <CardHeader>The phrase you entered is: </CardHeader>
                     <CardBody>
-                      {" "}
-                      {this.state.isLoading ? <Loading /> : this.state.ourInput}
+                      <p className="card-text">
+                        {" "}
+                        {this.state.isLoading ? (
+                          <Loading />
+                        ) : (
+                          this.state.ourInput
+                        )}
+                      </p>
                     </CardBody>
                   </Card>
                 </div>
+                <br />
                 <div className="english-trans">
-                  <Card className="h-100">
+                  <Card className="">
                     <CardHeader>
                       The English for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
-                      {this.state.isLoading ? <Loading /> : this.state.result}
+                      <p className="card-text">
+                        {this.state.isLoading ? <Loading /> : this.state.result}
+                      </p>
                     </CardBody>
                   </Card>
                 </div>
+                <br />
                 <div className="eng-to-arab-trans">
-                  <Card className="h-100">
+                  <Card className="">
                     <CardHeader>
                       The MSA for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
-                      {this.state.isLoading ? (
-                        <Loading />
-                      ) : (
-                        this.state.result2["Microsoft Model"]
-                      )}
+                      <p className="card-text">
+                        {this.state.isLoading ? (
+                          <Loading />
+                        ) : (
+                          this.state.result2["Microsoft Model"]
+                        )}
+                      </p>
                     </CardBody>
                   </Card>
                 </div>
