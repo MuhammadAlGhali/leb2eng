@@ -58,7 +58,11 @@ class Main extends Component {
             result2: response.data[1],
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          this.setState({ isLoading: false });
+          console.log(err);
+          alert("Something went wrong please try again.");
+        });
 
       this.setState({ textarea_input: "" });
     } else if (
@@ -81,7 +85,11 @@ class Main extends Component {
             result2: response.data[2],
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          this.setState({ isLoading: false });
+          console.log(err);
+          alert("Something went wrong please try again.");
+        });
       this.fileInput.current.value = null;
     } else {
       alert("You should input a file or text to translate");
@@ -137,9 +145,9 @@ class Main extends Component {
               </div>
               <div className="translations col-12 col-lg-8">
                 <div className="our-Input">
-                  <Card className="">
+                  <Card className="h-34">
                     <CardHeader>The phrase you entered is: </CardHeader>
-                    <CardBody>
+                    <CardBody className="h-100">
                       <p className="card-text">
                         {" "}
                         {this.state.isLoading ? (
@@ -153,7 +161,7 @@ class Main extends Component {
                 </div>
                 <br />
                 <div className="english-trans">
-                  <Card className="">
+                  <Card className="h-33">
                     <CardHeader>
                       The English for the phrase you entered is:{" "}
                     </CardHeader>
@@ -166,7 +174,7 @@ class Main extends Component {
                 </div>
                 <br />
                 <div className="eng-to-arab-trans">
-                  <Card className="">
+                  <Card className="h-33">
                     <CardHeader>
                       The MSA for the phrase you entered is:{" "}
                     </CardHeader>

@@ -39,7 +39,11 @@ class VoiceRecorder extends Component {
         console.log(res);
         this.props.parentCallback(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        this.props.parentLoading(false);
+        console.log(err);
+        alert("Something went wrong please try again.");
+      });
   };
 
   render() {

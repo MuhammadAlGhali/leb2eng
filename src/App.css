@@ -32,7 +32,9 @@ form {
   color: white;
   padding-bottom: 5px;
 }
-
+.card-text {
+  min-height: 100px;
+}
 .card {
   border: #312f2f 1px !important;
   border-radius: 5px !important;
@@ -48,5 +50,4 @@ form {
 }
 .translations .card-body {
   font-size: medium;
-  padding-top: 0;
 }
