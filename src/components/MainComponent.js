@@ -151,12 +151,7 @@ class Main extends Component {
                       The English for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
-                      
-                      {this.state.isLoading ? (
-                        <Loading />
-                      ) : (
-                        this.state.result
-                      )}
+                      {this.state.isLoading ? <Loading /> : this.state.result}
                     </CardBody>
                   </Card>
                 </div>
@@ -166,7 +161,6 @@ class Main extends Component {
                       The MSA for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
-                      
                       {this.state.isLoading ? (
                         <Loading />
                       ) : (
