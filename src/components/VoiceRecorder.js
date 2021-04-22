@@ -9,12 +9,14 @@ class VoiceRecorder extends Component {
 
     this.state = {
       recordState: null,
+      result: null
     };
   }
 
   start = () => {
     this.setState({
       recordState: RecordState.START,
+      result: null
     });
   };
 
@@ -29,6 +31,10 @@ class VoiceRecorder extends Component {
     console.log("audioData", audioData.blob);
     console.log("audioData", audioData.url);
     console.log("audioData", audioData.type);
+
+    this.setState({
+      result: <audio className="mt-2" controls><source src={audioData.url}/></audio>
+    })
 
     var data = new FormData();
     data.append("file", audioData.blob);
@@ -54,7 +60,9 @@ class VoiceRecorder extends Component {
         <AudioReactRecorder state={recordState} onStop={this.onStop} />
         <button onClick={this.start}>Start</button>
         <button onClick={this.stop}>Stop</button>
+        {this.state.result}
       </div>
+      
     );
   }
 }
