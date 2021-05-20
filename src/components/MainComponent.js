@@ -148,14 +148,12 @@ class Main extends Component {
                   <Card className="h-34">
                     <CardHeader>The phrase you entered is: </CardHeader>
                     <CardBody className="h-100">
-                      <p className="card-text">
-                        {" "}
-                        {this.state.isLoading ? (
-                          <Loading />
-                        ) : (
-                          this.state.ourInput
-                        )}
-                      </p>
+                      {" "}
+                      {this.state.isLoading ? (
+                        <Loading />
+                      ) : (
+                        <p className="card-text">( this.state.ourInput )</p>
+                      )}
                     </CardBody>
                   </Card>
                 </div>
@@ -166,9 +164,11 @@ class Main extends Component {
                       The English for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
-                      <p className="card-text">
-                        {this.state.isLoading ? <Loading /> : this.state.result}
-                      </p>
+                      {this.state.isLoading ? (
+                        <Loading />
+                      ) : (
+                        <p className="card-text">this.state.result</p>
+                      )}
                     </CardBody>
                   </Card>
                 </div>
@@ -179,13 +179,13 @@ class Main extends Component {
                       The MSA for the phrase you entered is:{" "}
                     </CardHeader>
                     <CardBody>
-                      <p className="card-text">
-                        {this.state.isLoading ? (
-                          <Loading />
-                        ) : (
-                          this.state.result2["Microsoft Model"]
-                        )}
-                      </p>
+                      {this.state.isLoading ? (
+                        <Loading />
+                      ) : (
+                        <p className="card-text">
+                          ( this.state.result2["Microsoft Model"] )
+                        </p>
+                      )}
                     </CardBody>
                   </Card>
                 </div>
