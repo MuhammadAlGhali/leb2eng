@@ -152,7 +152,7 @@ class Main extends Component {
                       {this.state.isLoading ? (
                         <Loading />
                       ) : (
-                        <p className="card-text">( this.state.ourInput )</p>
+                        <p className="card-text"> {this.state.ourInput} </p>
                       )}
                     </CardBody>
                   </Card>
@@ -167,7 +167,7 @@ class Main extends Component {
                       {this.state.isLoading ? (
                         <Loading />
                       ) : (
-                        <p className="card-text">this.state.result</p>
+                        <p className="card-text">{this.state.result}</p>
                       )}
                     </CardBody>
                   </Card>
@@ -183,7 +183,7 @@ class Main extends Component {
                         <Loading />
                       ) : (
                         <p className="card-text">
-                          ( this.state.result2["Microsoft Model"] )
+                          {this.state.result2["Microsoft Model"]}
                         </p>
                       )}
                     </CardBody>
